@@ -1,22 +1,33 @@
 <script setup>
+import {PaperAirplaneIcon} from '@heroicons/vue/24/solid';
 import { ref } from 'vue'
+import ChatMessage from '@/components/ChatMessage.vue';
+var compteur = 0
 const message = ref('')
 const messages = ref([])
 const addMessage = () => {
   if (message.value != '') {
-    messages.value.push(message.value)
+    messages.value.push({
+      id: compteur,
+      content: message.value,
+      date: new Date().toLocaleDateString(),
+      user: {
+        name: 'Fabien',
+        avatar: 'https://i.pravatar.cc/300'
+      }
+    })
     message.value = ''
+    compteur++
   }
+}
+const deleteMessage = (id) => {
+  messages.value = messages.value.filter((message) => message.id != id);
 }
 </script>
 <template>
-  <div>
+  <div class="p-4 bg-gradient-to-r from-yellow-400 to-black">
     <div v-for="(message, index) in messages" :key="index">
-      <h1
-        class="text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl dark:text-white text-white bg-gradient-to-r from-yellow-400 to-black p-4"
-      >
-        {{ message }}
-      </h1>
+      <ChatMessage :message="message" @delete="deleteMessage"/>
     </div>
   </div>
 
@@ -28,14 +39,15 @@ const addMessage = () => {
         id="message"
         cols="30"
         rows="10"
-        class="bg-black text-neutral-50 border-white border m-2"
+        class="m-2 bg-black border border-white text-neutral-50"
+        @keydown.enter="addMessage"
       ></textarea>
       <button
         @click="addMessage"
         type="button"
-        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+        class="px-5 mb-2 text-sm font-medium text-white bg-gray-800 rounded-lg hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 me-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
       >
-        Envoyer
+        <PaperAirplaneIcon class="h-5 w_5"/>
       </button>
     </div>
   </div>
