@@ -13,7 +13,7 @@ const addMessage = () => {
   <div>
     <div v-for="(message, index) in messages" :key="index">
       <h1
-        class="text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl dark:text-white text-white bg-gradient-to-r from-lime-400 to-black p-4"
+        class="text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl dark:text-white text-white bg-gradient-to-r from-yellow-400 to-black p-4"
       >
         {{ message }}
       </h1>
