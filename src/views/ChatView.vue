@@ -2,6 +2,8 @@
 import {PaperAirplaneIcon} from '@heroicons/vue/24/solid';
 import { ref } from 'vue'
 import ChatMessage from '@/components/ChatMessage.vue';
+import AppNavbar from '../components/AppNavbar.vue';
+
 var compteur = 0
 const message = ref('')
 const messages = ref([])
@@ -25,6 +27,7 @@ const deleteMessage = (id) => {
 }
 </script>
 <template>
+  <AppNavbar/>
   <div class="p-4 bg-gradient-to-r from-yellow-400 to-black">
     <div v-for="(message, index) in messages" :key="index">
       <ChatMessage :message="message" @delete="deleteMessage"/>
